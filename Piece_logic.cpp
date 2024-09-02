@@ -43,11 +43,48 @@ void printPieceInfo(Piece piece) {
     cout << ", Col: " << piece.getCol();
 }
 
+void movePawn(Piece piece, int newRow, int newCol) {
+    PieceType type = piece.getType();
+    if (type == PAWN) {
+        switch (piece.getColor()) {
+            case WHITE:
+            // double move
+                if (piece.getRow() == 1 && newRow == 3) {
+                    piece.setRow(newRow);
+                    piece.setCol(newCol);
+                } else if (newRow == piece.getRow() + 1) {
+                    // base move
+                    piece.setRow(newRow);
+                    piece.setCol(newCol);
+                } else {
+                    // No valid move
+                    cout << "Not a valid move!" << endl;
+                }
+                break;
+            case NIGGER:
+            // double move
+                if (piece.getRow() == 6 && newRow == 4) {
+                    piece.setRow(newRow);
+                    piece.setCol(newCol);
+                } else if (newRow == piece.getRow() - 1) {
+                    // base move
+                    piece.setRow(newRow);
+                    piece.setCol(newCol);
+                } else {
+                    // No valid move
+                    cout << "Not a valid move!" << endl;
+                }
+                break;
+        }
+    }
+}
+
 int main() {
     
     Piece piece(WHITE, PAWN, 1, 1);
-
-    printPieceInfo(piece);
-
+    movePawn(piece, 3, 1); // Double move
+    movePawn(piece, 4, 1); // Base move
+    movePawn(piece, 5, 1); // No valid move
     return 0;
+
 }

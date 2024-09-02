@@ -58,6 +58,7 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
     "iostream": "cpp",
-    "string": "cpp"
+    "string": "cpp",
+    "ostream": "cpp"
   }
 }
