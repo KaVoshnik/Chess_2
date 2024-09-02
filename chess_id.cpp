@@ -1,4 +1,7 @@
-#include "chess_object.h"
+#include "/home/avairon/Chess_2/chess_object.h"
+#include "/home/avairon/Chess_2/chess_object.cpp"
+
+
 
 void start_8_8(Piece **ret){
 
