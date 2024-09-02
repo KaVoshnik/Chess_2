@@ -1,5 +1,5 @@
 //#include <iostream>
-#include "main.h"
+#include "chess_object.h"
 
 //using std::cout;
 

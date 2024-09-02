@@ -1,5 +1,5 @@
-#ifndef class_h
-#define class_h
+#ifndef chess_object_h
+#define chess_object_h
 #include <iostream>
 #include <string>
 
