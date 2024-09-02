@@ -1,4 +1,4 @@
 #include <iostream>
 
-using namespace std::cout;
+using std::cout;
 
