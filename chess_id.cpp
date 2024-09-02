@@ -1,7 +1,4 @@
-//#include <iostream>
 #include "chess_object.h"
-
-//using std::cout;
 
 // белые 1 - пешка 2 - ферзь 3 - конь 4 - слон 5 - королева 6 - король 123456
 // негры p - пешка f - ферзь k - конь s = слон q - королева k - король pfksqk
