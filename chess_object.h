@@ -5,6 +5,20 @@
 
 using std::cout;
 
+enum class Color {
+    WHITE,
+    NIGGER
+};
+
+enum class PieceType {
+    PAWN,
+    ROOK,
+    KNIGHT,
+    BISHOP,
+    QUEEN,
+    KING
+};
+
 class Piece {
 
 public:
