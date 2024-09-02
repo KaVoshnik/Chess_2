@@ -17,12 +17,13 @@ enum PieceType {
     BISHOP, // диагональка
     QUEEN, //в пояснении не нуждается
     KING,
-    NAN
+    NAIN
 };
 
 class Piece {
 
 public:
+    Piece();
     Piece(Color color, PieceType type, int row, int col): //Конструктор  
     color(color), type(type), row(row), col(col) {}
     
@@ -54,7 +55,6 @@ public:
     void setType(PieceType newType){
         type = newType;
     }
-
 
 
 private:

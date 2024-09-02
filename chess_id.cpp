@@ -46,22 +46,30 @@ void start_8_8(Piece ret[8][8]){
 
 
 int main(){
-    Piece buffer = Piece(WHITE, NAN);
     Piece board[8][8];
 
+    for(int x = 0; x < 8; x++){
+        for(int y = 0; y < 8; y++){
+            board[x][y] = *new Piece(WHITE, NAIN, x, y);
+        }   
+    }
+    
     start_8_8(board);
+
+    char out = ' ';
 
     for(int a = 0; a < 8; a++){
         for(int b = 0; b < 8; b++){
-            char out = ' ';
-            switch(board[a][b].getType()){
-                case(PAWN):
-                    out = '1';
-                    break;
-                default:
-                    out = '.';
-                    break;
+            
+            if(board[a][b].getType() == PAWN){
+                out = '1';
             }
+            else if(board[a][b].getType() != PAWN){
+                out = '.';
+            }
+            else{}
+
+
             cout << out << " ";
             
         } 
