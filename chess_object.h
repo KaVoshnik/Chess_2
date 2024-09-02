@@ -5,17 +5,17 @@
 
 using std::cout;
 
-enum class Color {
+enum Color {
     WHITE,
     NIGGER
 };
 
-enum class PieceType {
-    PAWN,
-    ROOK,
-    KNIGHT,
-    BISHOP,
-    QUEEN,
+enum PieceType {
+    PAWN, //пешка
+    ROOK,  // Горизонталька
+    KNIGHT, // конь
+    BISHOP, // диагональка
+    QUEEN, //в пояснении не нуждается
     KING
 };
 
@@ -25,25 +25,36 @@ public:
     Piece(Color color, PieceType type, int row, int col): //Конструктор  
     color(color), type(type), row(row), col(col) {}
     
-    getColor() const {
+    Color getColor() {
         return color;
     } //Цвет фигуры
-    getType() const {
+
+    PieceType getType() {
         return type;
     }  //Тип фигуры
-    
+
     int getRow() const {
         return row;
     } 
+
     int getCol() const {
         return col;
     } 
-    void setRow(int newRow)const {
+
+    void setRow(int newRow) {
         row = newRow;
     } 
-    void setCol(int newCol) const {
+    void setCol(int newCol) {
         col = newCol;
     } 
+    void setColor(Color newColor){
+        color = newColor;
+    }
+    void setType(PieceType newType){
+        type = newType;
+    }
+
+
 
 private:
     Color color;

@@ -1,24 +1,20 @@
 #include "chess_object.h"
 
-// белые 1 - пешка 2 - ферзь 3 - конь 4 - слон 5 - королева 6 - король 123456
-// негры p - пешка f - ферзь k - конь s = слон q - королева k - король pfksqk
+void start_8_8(Piece ret[8][8]){
 
-void start_8_8(char ret[8][8]){
-
-    for(int a = 0; a < 8; a++){
-        for(int b = 0; b < 8; b++){
-            ret[a][b] = '0';   
-        } 
-    } 
 // фигуры вверх
-    ret[0][0] = 's';
-    ret[0][1] = 'k';
-    ret[0][2] = 'f';
-    ret[0][3] = 'q';
-    ret[0][4] = 'k';
-    ret[0][5] = 'f';
-    ret[0][6] = 'k';
-    ret[0][7] = 's';
+    ret[0][0].setType(ROOK);
+    ret[0][1].setType(KNIGHT);
+    ret[0][2].setType(BISHOP);
+    ret[0][3].setType(QUEEN);
+    ret[0][4].setType(KING);
+    ret[0][5].setType(BISHOP);
+    ret[0][6].setType(KNIGHT);
+    ret[0][7].setType(ROOK);
+
+    for(int i = 0; i < 8; i++){
+        ret[0][i].setColor(NIGGER);
+    }
     // фигуры низ
     ret[7][0] = '4';
     ret[7][1] = '3';
