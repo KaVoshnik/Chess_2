@@ -16,7 +16,8 @@ enum PieceType {
     KNIGHT, // конь
     BISHOP, // диагональка
     QUEEN, //в пояснении не нуждается
-    KING
+    KING,
+    NAN
 };
 
 class Piece {

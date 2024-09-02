@@ -13,49 +13,57 @@ void start_8_8(Piece ret[8][8]){
     ret[0][7].setType(ROOK);
 
     for(int i = 0; i < 8; i++){
+        ret[1][i].setType(PAWN);
+        ret[1][i].setColor(NIGGER);
+    }
+
+    for(int i = 0; i < 8; i++){
         ret[0][i].setColor(NIGGER);
     }
-    // фигуры низ
-    ret[7][0] = '4';
-    ret[7][1] = '3';
-    ret[7][2] = '2';
-    ret[7][3] = '5';
-    ret[7][4] = '6';
-    ret[7][5] = '2';
-    ret[7][6] = '3';
-    ret[7][7] = '4';
-    // пешки низ
-    ret[6][0] = '1';
-    ret[6][1] = '1';
-    ret[6][2] = '1';
-    ret[6][3] = '1';
-    ret[6][4] = '1';
-    ret[6][5] = '1';
-    ret[6][6] = '1';
-    ret[6][7] = '1';
 
-    // пешки вверх
-    ret[1][0] = 'p';
-    ret[1][1] = 'p';
-    ret[1][2] = 'p';
-    ret[1][3] = 'p';
-    ret[1][4] = 'p';
-    ret[1][5] = 'p';
-    ret[1][6] = 'p';
-    ret[1][7] = 'p';
+    // фигуры низ
+    ret[7][0].setType(ROOK);
+    ret[7][1].setType(KNIGHT);
+    ret[7][2].setType(BISHOP);
+    ret[7][3].setType(QUEEN);
+    ret[7][4].setType(KING);
+    ret[7][5].setType(BISHOP);
+    ret[7][6].setType(KNIGHT);
+    ret[7][7].setType(ROOK);
+
+    // пешки низ
+    for(int i = 0; i < 8; i++){
+        ret[6][i].setType(PAWN);
+        ret[6][i].setColor(WHITE);
+    }
+
+    for(int i = 0; i < 8; i++){
+        ret[0][i].setColor(WHITE);
+    }
+
+    //cout << "DDD"
 }
 
 
 int main(){
-
-    char board[8][8];
-
+    Piece buffer = Piece(WHITE, NAN);
+    Piece board[8][8];
 
     start_8_8(board);
 
     for(int a = 0; a < 8; a++){
         for(int b = 0; b < 8; b++){
-            cout << board[a][b] << " ";
+            char out = ' ';
+            switch(board[a][b].getType()){
+                case(PAWN):
+                    out = '1';
+                    break;
+                default:
+                    out = '.';
+                    break;
+            }
+            cout << out << " ";
+            
         } 
         cout << '\n';
     }
