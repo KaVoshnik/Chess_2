@@ -1,6 +1,6 @@
 #include "chess_object.h"
 
-void start_8_8(Piece ret[8][8]){
+void start_8_8(Piece **ret){
 
 // фигуры вверх
     ret[0][0].setType(ROOK);
@@ -46,32 +46,31 @@ void start_8_8(Piece ret[8][8]){
 
 
 int main(){
-    Piece board[8][8];
+    //FFFFFFFFFFFFFFFFFFFFFFFFFFFF
 
-    for(int x = 0; x < 8; x++){
-        for(int y = 0; y < 8; y++){
-            board[x][y] = *new Piece(WHITE, NAIN, x, y);
-        }   
+    Piece **board;
+
+    board = new Piece*[8];
+    for(int i = 0; i < 8; i++){
+        board[i] = new Piece[8];
     }
+
+    //FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
     
     start_8_8(board);
 
-    char out = ' ';
+    PieceType out = NAIN;
 
     for(int a = 0; a < 8; a++){
         for(int b = 0; b < 8; b++){
-            
-            if(board[a][b].getType() == PAWN){
-                out = '1';
-            }
-            else if(board[a][b].getType() != PAWN){
-                out = '.';
-            }
-            else{}
+            out = board[a][b].getType(); 
 
-
-            cout << out << " ";
-            
+            if(out == PAWN){
+                cout << "1 ";
+            }
+            else {
+                cout << ". ";
+            }
         } 
         cout << '\n';
     }

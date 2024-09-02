@@ -62,6 +62,6 @@ private:
     PieceType type;
     int row;
     int col;
-}
+};
 
 #endif
