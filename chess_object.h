@@ -23,9 +23,21 @@ enum PieceType {
 class Piece {
 
 public:
-    Piece();
-    Piece(Color color, PieceType type, int row, int col): //Конструктор  
-    //~Piece();
+    Piece(){
+        color = WHITE;
+        type = NAIN;
+        row = 0;
+        col = 0; 
+    }
+
+    Piece(Color newColor, PieceType newType, int newRow, int newCol){
+        color = newColor;
+        type = newType;
+        row = newRow;
+        col = newCol;
+    }
+
+    ~Piece(){}
     
     Color getColor();
     PieceType getType();

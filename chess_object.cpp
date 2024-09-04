@@ -1,8 +1,4 @@
-#include "/home/avairon/Chess_2/chess_object.h"
-
-    Piece();
-    Piece(Color color, PieceType type, int row, int col): //Конструктор  
-    //~Piece();
+#include "chess_object.h"
 
     Color Piece::getColor() {
         return color;

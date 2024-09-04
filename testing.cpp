@@ -1,5 +1,5 @@
-#include "/home/avairon/Chess_2/chess_object.h"
-#include "/home/avairon/Chess_2/chess_object.cpp"
+#include "chess_object.h"
+#include "chess_object.cpp"
 
 
 
@@ -15,5 +15,20 @@ int main(){
 
     //FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 
-    
+    board[4][4].move(4, 4);
+    board[4][4].setColor(WHITE);
+    board[4][4].setType(PAWN);
+
+
+    for(int a = 0; a < 8; a++){
+        for(int b = 0; b < 8; b++){
+            if(board[a][b].getType() == PAWN){
+                cout << "X ";
+            }
+            else{
+                cout << ". ";
+            }
+        }
+        cout << '\n';
+    }
 }
