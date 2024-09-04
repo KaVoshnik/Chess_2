@@ -7,9 +7,9 @@
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": true,
-      "cwd": "c:/Users/kavo/Chess_2",
-      "program": "c:/Users/kavo/Chess_2/build/Debug/outDebug",
+      "externalConsole": false,
+      "cwd": "/home/user/Chess_2",
+      "program": "/home/user/Chess_2/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
