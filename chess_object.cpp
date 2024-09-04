@@ -2,7 +2,7 @@
 
     Piece();
     Piece(Color color, PieceType type, int row, int col): //Конструктор  
-    //color(color), type(type), row(row), col(col) {}
+    //~Piece();
 
     Color Piece::getColor() {
         return color;
@@ -31,4 +31,8 @@
     }
     void Piece::setType(PieceType newType){
         type = newType;
+    }
+    void Piece::move(int newRow, int newCol){
+        col = newCol;
+        row = newRow;
     }
