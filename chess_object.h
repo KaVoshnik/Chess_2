@@ -51,7 +51,6 @@ public:
 
     void move(int newRow, int newCol);
 
-
 private:
     Color color;
     PieceType type;
