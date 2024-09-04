@@ -41,8 +41,8 @@ public:
     
     Color getColor();
     PieceType getType();
-    int getRow() ;
-    int getCol() ;
+    int getRow();
+    int getCol();
     
     void setRow(int newRow);
     void setCol(int newCol);

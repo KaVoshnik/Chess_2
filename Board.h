@@ -1,4 +1,5 @@
 #include <iostream>
+#include "chess_object.h"
 
 using std::cout;
 using std::endl;
@@ -6,10 +7,26 @@ using std::endl;
 class Board
 {
 public:
-    Board();
-    ~Board();
+    Board(){
+        Piece **board;
+
+        board = new Piece*[8];
+        for(int i = 0; i < 8; i++){
+            board[i] = new Piece[8];
+        }
+    }
+
+    ~Board(){}
+
+    Piece** getBoard();
+    void setBoard(Piece** newBoard);
+
     void printBoard();
-    void movePiece();
+    //void movePiece();
+
+    Piece getPiece(int row, int col);
+    void setPiece(Piece newPiece);
+
 private:
-    char board[8][8];
+    Piece **board;
 };
