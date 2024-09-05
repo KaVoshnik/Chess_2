@@ -7,7 +7,7 @@ using std::cout;
 
 enum Color {
     WHITE,
-    NIGGER
+    NIGGER //niga
 };
 
 enum PieceType {
