@@ -1,13 +1,8 @@
-#include <cassert>
 #include "include/Board.h"
 
-
-
 int main() {
+    Board board = board.set_base8x8(); //init basic 8x8 board with pieces
     
-    Board board = *new Board();
-    Piece piece(WHITE, PAWN, 4, 3);
-    board.setPiece(piece);
-    board.printBoard();
+    board.printBoard(); //output all board statement
     return 0;
 }

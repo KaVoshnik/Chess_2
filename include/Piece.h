@@ -49,7 +49,11 @@ public:
     void setColor(Color newColor);
     void setType(PieceType newType);
 
-    void move(int newRow, int newCol);
+    void operator=(Piece& other);
+    void changePiece(Color newColor, PieceType newType, int newRow, int newCol);
+    void newCords(int newRow, int newCol);
+
+
 
 private:
     Color color;

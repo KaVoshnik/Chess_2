@@ -17,6 +17,11 @@
         return col;
     } 
 
+    void Piece::newCords(int newRow, int newCol) {
+        row = newRow;
+        col = newCol;
+    }
+
     void Piece::setRow(int newRow) {
         row = newRow;
     } 
@@ -33,13 +38,19 @@
         type = newType;
     }
 
-    void Piece::move(int newRow, int newCol) {
-    if (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) { // Add limitation for row and column
-        row = newRow;
+    void Piece::operator=(Piece& other){
+        type = other.type;
+        color = other.color;
+        col = other.col;
+        row = other.row;
+    }
+
+    void Piece::changePiece(Color newColor, PieceType newType, int newRow, int newCol){
+        type = newType;
+        color = newColor;
         col = newCol;
-    } else {
-        // Exception handling or error message
+        row = newRow;
     }
 
-    }
-
+//git config --global user.email "you@example.com"
+//git config --global user.name "Your Name"
