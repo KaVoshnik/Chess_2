@@ -1,4 +1,4 @@
-#include "Board.h"
+#include "../include/Board.h"
 
 
 Piece** Board::getBoard(){
