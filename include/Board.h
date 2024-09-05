@@ -1,5 +1,5 @@
 #include <iostream>
-#include "chess_object.h"
+#include "Piece.h"
 
 using std::cout;
 using std::endl;

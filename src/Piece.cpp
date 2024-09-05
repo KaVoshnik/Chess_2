@@ -1,4 +1,5 @@
-#include "../include/chess_object.h"
+#include "../include/Piece.h"
+
 
     Color Piece::getColor() {
         return color;
