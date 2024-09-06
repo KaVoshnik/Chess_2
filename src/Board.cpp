@@ -88,9 +88,9 @@ Board Board::set_base8x8(){
     piece.changePiece(NIGGER, QUEEN, 0, 3);
     outBoard.setPiece(piece);
 
-    piece.changePiece(NIGGER, KING, 7, 4);
+    piece.changePiece(WHITE, KING, 7, 4);
     outBoard.setPiece(piece);
-    piece.changePiece(NIGGER, QUEEN, 7, 3);
+    piece.changePiece(WHITE, QUEEN, 7, 3);
     outBoard.setPiece(piece);
 
     return outBoard;
