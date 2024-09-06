@@ -53,6 +53,7 @@ public:
     void setPiece(Piece& newPiece);
 
     Board set_base8x8();
+    void moveFromTo(int x1, int y1, int x2, int y2);
 
 private:
     Piece **board;
