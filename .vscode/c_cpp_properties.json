@@ -2,10 +2,14 @@
   "configurations": [
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
       "name": "windows-gcc-x64",
       "includePath": [
         "${workspaceFolder}/**"
       ],
+<<<<<<< Updated upstream
       "compilerPath": "gcc",
       "cStandard": "${default}",
       "cppStandard": "${default}",
@@ -19,6 +23,12 @@
       "cStandard": "${default}",
       "cppStandard": "${default}",
       "intelliSenseMode": "windows-gcc-x86",
+>>>>>>> Stashed changes
+=======
+      "compilerPath": "D:/Soft/gcc/bin/gcc.exe",
+      "cStandard": "${default}",
+      "cppStandard": "${default}",
+      "intelliSenseMode": "windows-gcc-x64",
 >>>>>>> Stashed changes
       "compilerArgs": [
         ""
