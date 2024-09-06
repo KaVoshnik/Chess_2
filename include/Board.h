@@ -59,4 +59,4 @@ private:
     Piece **board;
     int sx;
     int sy;
-}; //TESTING MERGE FUNCTION
+};
