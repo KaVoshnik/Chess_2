@@ -5,7 +5,15 @@
       "includePath": [
         "${workspaceFolder}/**"
       ],
+<<<<<<< HEAD
       "compilerPath": "D:/Soft/gcc/bin/gcc.exe",
+=======
+<<<<<<< Updated upstream
+      "compilerPath": "gcc",
+=======
+      "compilerPath": "D:/Soft/gcc/bin/gcc.exe",
+>>>>>>> Stashed changes
+>>>>>>> origin/core
       "cStandard": "${default}",
       "cppStandard": "${default}",
       "intelliSenseMode": "windows-gcc-x64",
