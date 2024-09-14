@@ -1,11 +1,13 @@
 #include "include/Board.h"
 
 /*  
+    
     DESCRYPTION
 
     cords: X is vertical Y is horizontal 
 
     FOR EXAMPLE, i take raw version pawn logic to test
+    
 */
 
 
