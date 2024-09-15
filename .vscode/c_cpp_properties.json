@@ -11,6 +11,9 @@
       ],
 <<<<<<< Updated upstream
       "compilerPath": "gcc",
+=======
+      "compilerPath": "D:/Soft/gcc/bin/gcc.exe",
+>>>>>>> Stashed changes
       "cStandard": "${default}",
       "cppStandard": "${default}",
       "intelliSenseMode": "windows-gcc-x64",
