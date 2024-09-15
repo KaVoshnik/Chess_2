@@ -175,13 +175,58 @@ void Board::resizeBoard(int size){
          board[i] = new Piece[size]();
     }
 
-    for(int a = 0; a < oldsx; a++){
-        for(int b = 0; b < oldsy; b++){
-            board[a][b] = boardBuff[a][b];
+    if(oldsx < size){
+        for(int a = 0; a < oldsx; a++){
+            for(int b = 0; b < oldsy; b++){
+                board[a][b] = boardBuff[a][b];
+            }
+        }
+    }
+    else{
+        for(int a = 0; a < sx; a++){
+            for(int b = 0; b < sy; b++){
+                board[a][b] = boardBuff[a][b];
+            }
         }
     }
 }
 
-void Board::resizeBoardXY(int sizeX, int sizeY){
+void Board::resizeBoard(int sizeX, int sizeY){
+    Piece** boardBuff = board;
 
+    int oldsx = sx;
+    int oldsy = sy;
+    sx = sizeX;
+    sy = sizeY;
+
+    board = new Piece*[sizeX]();
+    for(int i = 0; i < sizeX; i++){
+         board[i] = new Piece[sizeY]();
+    }
+
+    if(oldsx < sizeX){
+        for(int a = 0; a < oldsx; a++){
+            if(oldsy < sizeY){
+                for(int b = 0; b < oldsy; b++){
+                    board[a][b] = boardBuff[a][b];
+                }
+            } else {
+                for(int b = 0; b < sizeY; b++){
+                    board[a][b] = boardBuff[a][b];
+                }
+            }
+        }
+    } else {
+        for(int a = 0; a < sizeX; a++){
+            if(oldsy < sizeY){
+                for(int b = 0; b < oldsy; b++){
+                    board[a][b] = boardBuff[a][b];
+                }
+            } else {
+                for(int b = 0; b < sizeY; b++){
+                    board[a][b] = boardBuff[a][b];
+                }
+            }
+        }
+    }
 }

@@ -47,7 +47,7 @@ public:
     void setBoard(Piece** newBoard);
 
     void resizeBoard(int size);
-    void resizeBoardXY(int sizeX, int sizeY);
+    void resizeBoard(int sizeX, int sizeY);
 
     void printBoard();
     //void movePiece();
