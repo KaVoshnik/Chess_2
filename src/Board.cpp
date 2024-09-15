@@ -162,8 +162,6 @@ void Board::moveFromTo(int x1, int y1, int x2, int y2){
     board[x1][y1].changePiece(WHITE, NAIN, x1, y1);
 }
 
-<<<<<<< HEAD
-=======
 void Board::resizeBoard(int size){
     Piece** boardBuff = board;
 
@@ -232,4 +230,3 @@ void Board::resizeBoard(int sizeX, int sizeY){
         }
     }
 }
->>>>>>> origin/core
