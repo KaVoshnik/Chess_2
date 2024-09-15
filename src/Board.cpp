@@ -161,3 +161,27 @@ void Board::moveFromTo(int x1, int y1, int x2, int y2){
     board[x2][y2].newCords(x2, y2);
     board[x1][y1].changePiece(WHITE, NAIN, x1, y1);
 }
+
+void Board::resizeBoard(int size){
+    Piece** boardBuff = board;
+
+    int oldsx = sx;
+    int oldsy = sy;
+    sx = size;
+    sy = size;
+
+    board = new Piece*[size]();
+    for(int i = 0; i < size; i++){
+         board[i] = new Piece[size]();
+    }
+
+    for(int a = 0; a < oldsx; a++){
+        for(int b = 0; b < oldsy; b++){
+            board[a][b] = boardBuff[a][b];
+        }
+    }
+}
+
+void Board::resizeBoardXY(int sizeX, int sizeY){
+
+}
