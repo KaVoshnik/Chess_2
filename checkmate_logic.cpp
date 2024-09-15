@@ -85,6 +85,72 @@ void pawn_to(int x, int y, PieceType type, Board board){
     
 }
 
+void king_turn(int x1, int y1, int x2, int y2, Board board){
+
+
+    if (board.getPiece(x1, y1).getType() == KING){
+        if (board.getPiece(x1, y1).getColor() == WHITE){
+            //left top
+            if (x1 - x2 == 1 and y1 - y2 == 1){
+                if (board.getPiece(x2, y2).getType() != NAIN and y1 == y2){
+                    cout << "uncurrect turn!!!!!! aaaaaaa\n";
+                    return;
+                }
+                board.moveFromTo(x1,y1,x2,y2);
+                return;   
+            }
+            //mid top
+
+                if (x1 - x2 == 1 and y1 == y2){
+                if (board.getPiece(x2, y2).getType() != NAIN and y1 == y2){
+                    cout << "uncurrect turn!!!!!! aaaaaaa\n";
+                    return;
+                }
+                board.moveFromTo(x1,y1,x2,y2);
+                return;
+            }
+            /*
+            //right top
+
+            if (x1 - x2 == 1 and y1 - y2 == 1){
+                if (board.getPiece(x2, y2).getType() != NAIN and y1 == y2){
+                    cout << "uncurrect turn!!!!!! aaaaaaa\n";
+                    return;
+                }
+                board.moveFromTo(x1,y1,x2,y2);
+                return;
+            }
+            */
+            //mid left
+                if (x1 == x2 and y1 - y2 == 1){
+                if (board.getPiece(x2, y2).getType() != NAIN and y1 == y2){
+                    cout << "uncurrect turn!!!!!! aaaaaaa\n";
+                    return;
+                }
+                board.moveFromTo(x1,y1,x2,y2);
+                return; 
+            }
+            //mid right
+
+                if (x1 == x2 and y1 - y2 == 1){
+                if (board.getPiece(x2, y2).getType() != NAIN and y1 == y2){
+                    cout << "uncurrect turn!!!!!! aaaaaaa\n";
+                    return;
+                }
+                board.moveFromTo(x1,y1,x2,y2);
+                return;
+            }
+            /*
+            //bottom left
+                if (x1 - x2 == 1 and y1 - y2 == 1){
+                if (board.getPiece(x2, y2).getType() != NAIN and y1 == y2){
+                    cout << "uncurrect turn!!!!!! aaaaaaa\n";
+                    return;
+                }
+                board.moveFromTo(x1,y1,x2,y2);
+                return;
+            }
+            */
 int main() {
     Board board = board.set_base8x8(); //init basic 8x8 board with pieces
     //Piece piece(WHITE, PAWN, 2, 1);
