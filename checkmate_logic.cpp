@@ -2,7 +2,7 @@
 
 /*  
     
-    DESCRYPTION
+    Desctiption
 
     cords: X is vertical Y is horizontal 
 
