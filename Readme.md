@@ -2,7 +2,7 @@
 
 # Technologies
 
-- Programming language: C#
+- Programming language: java
 - Platform: Windows, Linux
 
 # Participation in the project
