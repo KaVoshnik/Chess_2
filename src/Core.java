@@ -14,8 +14,8 @@ class Core {
     }
 
     public static void main(String[] args) {
-        Position pos = new Position(0, 1);
-        Piece piece = new Piece(PieceType.PAWN, Color.WHITE, pos);
-        System.out.println(piece);
+        ChessBoard board = new ChessBoard();
+        board.initializeStandard();
+        System.out.println(board.getPiece(0, 0));
     }
 }
