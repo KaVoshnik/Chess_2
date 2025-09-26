@@ -2,11 +2,19 @@
  * Класс, представляющий шахматную фигуру
  */
 public class Piece {
-    public Core.PieceType type;
-    public Core.Color color;
-    public Position position;
+    private final Core.PieceType type;
+    private final Core.Color color;
+    private final Position position;
 
     public Piece(Core.PieceType type, Core.Color color, Position position) {
+        if (type == null) {
+            throw new IllegalArgumentException("type cannot be null");
+        } else if (position == null) {
+            throw new IllegalArgumentException("position cannot be null");
+        } else if (color == null) {
+            throw new IllegalArgumentException("color cannot be null");
+        }
+
         this.type = type;
         this.color = color;
         this.position = position;
