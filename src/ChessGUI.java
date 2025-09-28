@@ -175,6 +175,14 @@ public class ChessGUI extends JFrame {
                 updateBoard();
             }
         } else {
+            // Если кликнули на ту же клетку, снимаем выделение
+            if (x == selectedX && y == selectedY) {
+                selectedX = -1;
+                selectedY = -1;
+                updateBoard();
+                return;
+            }
+            
             // Делаем ход
             if (gameLogic.makeMove(selectedX, selectedY, x, y)) {
                 selectedX = -1;
@@ -232,6 +240,7 @@ public class ChessGUI extends JFrame {
                     square.add(pieceLabel, BorderLayout.CENTER);
                 }
                 
+                square.revalidate();
                 square.repaint();
             }
         }
