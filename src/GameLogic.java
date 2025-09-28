@@ -5,12 +5,16 @@ public class GameLogic {
     private ChessBoard board;
     private Core.Color currentPlayer;
     private boolean gameOver;
+    private List<Move> moveHistory;
+    private int moveCounter;
     
     public GameLogic() {
         this.board = new ChessBoard();
         this.board.initializeStandard();
         this.currentPlayer = Core.Color.WHITE;
         this.gameOver = false;
+        this.moveHistory = new ArrayList<>();
+        this.moveCounter = 0;
     }
     
     public ChessBoard getBoard() {
@@ -35,6 +39,18 @@ public class GameLogic {
             }
         }
         return "";
+    }
+    
+    public List<Move> getMoveHistory() {
+        return new ArrayList<>(moveHistory);
+    }
+    
+    public Move getLastMove() {
+        return moveHistory.isEmpty() ? null : moveHistory.get(moveHistory.size() - 1);
+    }
+    
+    public int getMoveCount() {
+        return moveCounter;
     }
     
     public boolean isCheckmate(Core.Color color) {
@@ -161,6 +177,12 @@ public class GameLogic {
             return false;
         }
         
+        // Сохраняем ход в историю
+        Move move = new Move(new Position(fromX, fromY), new Position(toX, toY), 
+                           piece, capturedPiece, moveCounter + 1);
+        moveHistory.add(move);
+        moveCounter++;
+        
         // Меняем игрока
         currentPlayer = (currentPlayer == Core.Color.WHITE) ? Core.Color.BLACK : Core.Color.WHITE;
         
@@ -174,7 +196,7 @@ public class GameLogic {
         return true;
     }
     
-    private boolean isValidMove(Piece piece, int toX, int toY) {
+    public boolean isValidMove(Piece piece, int toX, int toY) {
         // Проверяем, что целевая позиция в пределах доски
         if (toX < 0 || toX > 7 || toY < 0 || toY > 7) {
             return false;

@@ -147,7 +147,13 @@ public class ChessGame extends JFrame {
         sidePanel.add(Box.createVerticalStrut(10));
         sidePanel.add(exitButton);
         
-        sidePanel.add(Box.createVerticalStrut(30));
+        sidePanel.add(Box.createVerticalStrut(20));
+        
+        // Панель истории ходов
+        JPanel historyPanel = createHistoryPanel();
+        sidePanel.add(historyPanel);
+        
+        sidePanel.add(Box.createVerticalStrut(20));
         
         // Информационная панель
         JPanel infoPanel = createInfoPanel();
@@ -212,8 +218,45 @@ public class ChessGame extends JFrame {
         return infoPanel;
     }
     
+    private JPanel createHistoryPanel() {
+        JPanel historyPanel = new JPanel();
+        historyPanel.setBackground(new Color(60, 60, 60));
+        historyPanel.setBorder(BorderFactory.createEmptyBorder(15, 10, 15, 10));
+        historyPanel.setLayout(new BoxLayout(historyPanel, BoxLayout.Y_AXIS));
+        
+        JLabel historyTitle = new JLabel("📜 История ходов");
+        historyTitle.setFont(new Font("Arial", Font.BOLD, 14));
+        historyTitle.setForeground(TEXT_COLOR);
+        historyTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        historyPanel.add(historyTitle);
+        
+        historyPanel.add(Box.createVerticalStrut(10));
+        
+        // Создаем список истории ходов
+        moveHistoryModel = new DefaultListModel<>();
+        moveHistoryList = new JList<>(moveHistoryModel);
+        moveHistoryList.setFont(new Font("Arial", Font.PLAIN, 11));
+        moveHistoryList.setForeground(new Color(200, 200, 200));
+        moveHistoryList.setBackground(new Color(45, 45, 45));
+        moveHistoryList.setSelectionBackground(new Color(70, 130, 180));
+        moveHistoryList.setSelectionForeground(TEXT_COLOR);
+        
+        JScrollPane scrollPane = new JScrollPane(moveHistoryList);
+        scrollPane.setPreferredSize(new Dimension(180, 120));
+        scrollPane.setMaximumSize(new Dimension(180, 120));
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.getVerticalScrollBar().setBackground(new Color(45, 45, 45));
+        
+        historyPanel.add(scrollPane);
+        
+        return historyPanel;
+    }
+    
     private JLabel currentPlayerLabel;
     private JLabel gameStatusLabel;
+    private JList<String> moveHistoryList;
+    private DefaultListModel<String> moveHistoryModel;
+    private boolean isAnimating = false;
     
     private void handleSquareClick(int x, int y) {
         // Не позволяем делать ходы после окончания игры
@@ -238,12 +281,9 @@ public class ChessGame extends JFrame {
                 return;
             }
             
-            // Делаем ход
-            if (gameLogic.makeMove(selectedX, selectedY, x, y)) {
-                selectedX = -1;
-                selectedY = -1;
-                updateBoard();
-                updateGameStatus();
+            // Делаем ход с анимацией
+            if (isValidMove(selectedX, selectedY, x, y)) {
+                animateMove(selectedX, selectedY, x, y);
             } else {
                 // Неверный ход, снимаем выделение
                 selectedX = -1;
@@ -251,6 +291,16 @@ public class ChessGame extends JFrame {
                 updateBoard();
             }
         }
+    }
+    
+    private boolean isValidMove(int fromX, int fromY, int toX, int toY) {
+        Piece piece = gameLogic.getBoard().getPiece(fromX, fromY);
+        if (piece == null || piece.getColor() != gameLogic.getCurrentPlayer()) {
+            return false;
+        }
+        
+        // Проверяем базовые правила движения
+        return gameLogic.isValidMove(piece, toX, toY);
     }
     
     private void updateGameStatus() {
@@ -330,6 +380,64 @@ public class ChessGame extends JFrame {
                 return piece.getColor() == Core.Color.WHITE ? "♙" : "♟";
             default:
                 return "";
+        }
+    }
+    
+    private void animateMove(int fromX, int fromY, int toX, int toY) {
+        if (isAnimating) {
+            return; // Не позволяем новую анимацию во время текущей
+        }
+        
+        Piece piece = gameLogic.getBoard().getPiece(fromX, fromY);
+        if (piece == null) {
+            return;
+        }
+        
+        // Создаем лейбл фигуры для анимации
+        JLabel pieceLabel = new JLabel(getPieceSymbol(piece), JLabel.CENTER);
+        pieceLabel.setFont(new Font("Arial", Font.BOLD, 28));
+        pieceLabel.setForeground(piece.getColor() == Core.Color.WHITE ? Color.WHITE : Color.BLACK);
+        
+        // Создаем анимацию
+        PieceAnimation animation = new PieceAnimation(
+            squares[fromX][fromY], 
+            squares[toX][toY], 
+            pieceLabel,
+            () -> {
+                // Callback после завершения анимации
+                isAnimating = false;
+                executeMove(fromX, fromY, toX, toY);
+            }
+        );
+        
+        isAnimating = true;
+        animation.start();
+    }
+    
+    private void executeMove(int fromX, int fromY, int toX, int toY) {
+        // Выполняем ход
+        if (gameLogic.makeMove(fromX, fromY, toX, toY)) {
+            selectedX = -1;
+            selectedY = -1;
+            updateBoard();
+            updateGameStatus();
+            updateMoveHistory();
+        } else {
+            // Если ход не удался, снимаем выделение
+            selectedX = -1;
+            selectedY = -1;
+            updateBoard();
+        }
+    }
+    
+    private void updateMoveHistory() {
+        if (moveHistoryModel != null) {
+            Move lastMove = gameLogic.getLastMove();
+            if (lastMove != null) {
+                moveHistoryModel.addElement(lastMove.toString());
+                // Автоматически прокручиваем к последнему ходу
+                moveHistoryList.ensureIndexIsVisible(moveHistoryModel.getSize() - 1);
+            }
         }
     }
 }
