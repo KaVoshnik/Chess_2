@@ -25,29 +25,31 @@ public class ChessBoard {
                 Core.PieceType.KNIGHT, Core.PieceType.ROOK
         };
 
+        // Черные фигуры (вверху)
         for (int y = 0; y < 8; y++) {
             Core.PieceType type = backRankTypes[y];
             Position pos = new Position(0, y);
-            Piece piece = new Piece(type, Core.Color.WHITE, pos);
+            Piece piece = new Piece(type, Core.Color.BLACK, pos);
             setPiece(piece, 0, y);
         }
 
         for (int y = 0; y < 8; y++) {
             Position pos = new Position(1, y);
-            Piece pawn = new Piece(Core.PieceType.PAWN, Core.Color.WHITE, pos);
+            Piece pawn = new Piece(Core.PieceType.PAWN, Core.Color.BLACK, pos);
             setPiece(pawn, 1, y);
         }
 
+        // Белые фигуры (внизу)
         for (int y = 0; y < 8; y++) {
             Core.PieceType type = backRankTypes[y];
             Position pos = new Position(7, y);
-            Piece piece = new Piece(type, Core.Color.BLACK, pos);
+            Piece piece = new Piece(type, Core.Color.WHITE, pos);
             setPiece(piece, 7, y);
         }
 
         for (int y = 0; y < 8; y++) {
             Position pos = new Position(6, y);
-            Piece pawn = new Piece(Core.PieceType.PAWN, Core.Color.BLACK, pos);
+            Piece pawn = new Piece(Core.PieceType.PAWN, Core.Color.WHITE, pos);
             setPiece(pawn, 6, y);
         }
     }

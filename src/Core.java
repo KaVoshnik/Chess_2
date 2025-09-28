@@ -14,8 +14,7 @@ class Core {
     }
 
     public static void main(String[] args) {
-        ChessBoard board = new ChessBoard();
-        board.initializeStandard();
-        System.out.println(board.getPiece(0, 0));
+        ChessGUI gui = new ChessGUI();
+        gui.setVisible(true);
     }
 }

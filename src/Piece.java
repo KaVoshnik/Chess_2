@@ -4,7 +4,7 @@
 public class Piece {
     private final Core.PieceType type;
     private final Core.Color color;
-    private final Position position;
+    private Position position;
 
     public Piece(Core.PieceType type, Core.Color color, Position position) {
         if (type == null) {
@@ -30,6 +30,10 @@ public class Piece {
 
     public Position getPosition() {
         return position;
+    }
+    
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     @Override
