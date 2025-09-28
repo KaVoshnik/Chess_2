@@ -53,6 +53,29 @@ public class GameLogic {
         return moveCounter;
     }
     
+    public List<Position> getPossibleMoves(int x, int y) {
+        List<Position> possibleMoves = new ArrayList<>();
+        Piece piece = board.getPiece(x, y);
+        
+        if (piece == null || piece.getColor() != currentPlayer) {
+            return possibleMoves;
+        }
+        
+        // Проверяем все клетки доски
+        for (int toX = 0; toX < 8; toX++) {
+            for (int toY = 0; toY < 8; toY++) {
+                if (isValidMove(piece, toX, toY)) {
+                    // Проверяем, не ставит ли этот ход короля под шах
+                    if (wouldMoveBeValid(x, y, toX, toY)) {
+                        possibleMoves.add(new Position(toX, toY));
+                    }
+                }
+            }
+        }
+        
+        return possibleMoves;
+    }
+    
     public boolean isCheckmate(Core.Color color) {
         if (!isInCheck(color)) {
             return false;

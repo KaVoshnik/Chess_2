@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChessGame extends JFrame {
     private GameLogic gameLogic;
@@ -130,6 +132,7 @@ public class ChessGame extends JFrame {
             gameLogic = new GameLogic();
             selectedX = -1;
             selectedY = -1;
+            possibleMoves.clear();
             updateBoard();
             updateGameStatus();
         });
@@ -257,6 +260,7 @@ public class ChessGame extends JFrame {
     private JList<String> moveHistoryList;
     private DefaultListModel<String> moveHistoryModel;
     private boolean isAnimating = false;
+    private List<Position> possibleMoves = new ArrayList<>();
     
     private void handleSquareClick(int x, int y) {
         // Не позволяем делать ходы после окончания игры
@@ -270,6 +274,8 @@ public class ChessGame extends JFrame {
             if (piece != null && piece.getColor() == gameLogic.getCurrentPlayer()) {
                 selectedX = x;
                 selectedY = y;
+                // Получаем возможные ходы для выбранной фигуры
+                possibleMoves = gameLogic.getPossibleMoves(x, y);
                 updateBoard();
             }
         } else {
@@ -277,6 +283,7 @@ public class ChessGame extends JFrame {
             if (x == selectedX && y == selectedY) {
                 selectedX = -1;
                 selectedY = -1;
+                possibleMoves.clear();
                 updateBoard();
                 return;
             }
@@ -288,6 +295,7 @@ public class ChessGame extends JFrame {
                 // Неверный ход, снимаем выделение
                 selectedX = -1;
                 selectedY = -1;
+                possibleMoves.clear();
                 updateBoard();
             }
         }
@@ -301,6 +309,15 @@ public class ChessGame extends JFrame {
         
         // Проверяем базовые правила движения
         return gameLogic.isValidMove(piece, toX, toY);
+    }
+    
+    private boolean isPossibleMove(int x, int y) {
+        for (Position pos : possibleMoves) {
+            if (pos.getX() == x && pos.getY() == y) {
+                return true;
+            }
+        }
+        return false;
     }
     
     private void updateGameStatus() {
@@ -349,6 +366,11 @@ public class ChessGame extends JFrame {
                     square.setBackground(SELECTED_COLOR);
                 }
                 
+                // Подсвечиваем возможные ходы
+                if (isPossibleMove(x, y)) {
+                    square.setBackground(POSSIBLE_MOVE_COLOR);
+                }
+                
                 // Отображаем фигуру
                 Piece piece = gameLogic.getBoard().getPiece(x, y);
                 if (piece != null) {
@@ -358,9 +380,22 @@ public class ChessGame extends JFrame {
                     square.add(pieceLabel, BorderLayout.CENTER);
                 }
                 
+                // Обновляем границы клетки
+                updateSquareBorder(square, x, y);
+                
                 square.revalidate();
                 square.repaint();
             }
+        }
+    }
+    
+    private void updateSquareBorder(JPanel square, int x, int y) {
+        // Сбрасываем границу к стандартной
+        square.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 1));
+        
+        // Если клетка не выбрана и нет наведения мыши, оставляем стандартную границу
+        if (selectedX != x || selectedY != y) {
+            // Ничего не делаем - стандартная граница
         }
     }
     
@@ -419,6 +454,7 @@ public class ChessGame extends JFrame {
         if (gameLogic.makeMove(fromX, fromY, toX, toY)) {
             selectedX = -1;
             selectedY = -1;
+            possibleMoves.clear();
             updateBoard();
             updateGameStatus();
             updateMoveHistory();
@@ -426,6 +462,7 @@ public class ChessGame extends JFrame {
             // Если ход не удался, снимаем выделение
             selectedX = -1;
             selectedY = -1;
+            possibleMoves.clear();
             updateBoard();
         }
     }
