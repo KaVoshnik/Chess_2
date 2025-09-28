@@ -14,7 +14,7 @@ class Core {
     }
 
     public static void main(String[] args) {
-        ChessGUI gui = new ChessGUI();
-        gui.setVisible(true);
+        MainMenu menu = new MainMenu();
+        menu.setVisible(true);
     }
 }

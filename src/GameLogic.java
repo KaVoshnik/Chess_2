@@ -25,6 +25,80 @@ public class GameLogic {
         return gameOver;
     }
     
+    public String getGameStatus() {
+        if (gameOver) {
+            Core.Color opponentColor = (currentPlayer == Core.Color.WHITE) ? Core.Color.BLACK : Core.Color.WHITE;
+            if (isCheckmate(currentPlayer)) {
+                return "МАТ! Победили " + (opponentColor == Core.Color.WHITE ? "Белые" : "Черные");
+            } else if (isStalemate(currentPlayer)) {
+                return "ПАТ! Ничья";
+            }
+        }
+        return "";
+    }
+    
+    public boolean isCheckmate(Core.Color color) {
+        if (!isInCheck(color)) {
+            return false;
+        }
+        
+        // Проверяем, есть ли хотя бы один валидный ход
+        return !hasValidMoves(color);
+    }
+    
+    public boolean isStalemate(Core.Color color) {
+        if (isInCheck(color)) {
+            return false;
+        }
+        
+        // Проверяем, есть ли хотя бы один валидный ход
+        return !hasValidMoves(color);
+    }
+    
+    private boolean hasValidMoves(Core.Color color) {
+        for (int fromX = 0; fromX < 8; fromX++) {
+            for (int fromY = 0; fromY < 8; fromY++) {
+                Piece piece = board.getPiece(fromX, fromY);
+                if (piece != null && piece.getColor() == color) {
+                    for (int toX = 0; toX < 8; toX++) {
+                        for (int toY = 0; toY < 8; toY++) {
+                            if (isValidMove(piece, toX, toY)) {
+                                // Проверяем, не ставит ли этот ход короля под шах
+                                if (wouldMoveBeValid(fromX, fromY, toX, toY)) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    private boolean wouldMoveBeValid(int fromX, int fromY, int toX, int toY) {
+        Piece piece = board.getPiece(fromX, fromY);
+        if (piece == null) {
+            return false;
+        }
+        
+        // Сохраняем текущее состояние
+        Piece capturedPiece = board.getPiece(toX, toY);
+        board.setPiece(null, fromX, fromY);
+        piece.setPosition(new Position(toX, toY));
+        board.setPiece(piece, toX, toY);
+        
+        // Проверяем, не поставили ли мы себя под шах
+        boolean inCheck = isInCheck(piece.getColor());
+        
+        // Восстанавливаем состояние
+        board.setPiece(piece, fromX, fromY);
+        piece.setPosition(new Position(fromX, fromY));
+        board.setPiece(capturedPiece, toX, toY);
+        
+        return !inCheck;
+    }
+    
     public boolean isInCheck(Core.Color color) {
         // Находим короля указанного цвета
         Position kingPos = findKing(color);
@@ -89,6 +163,13 @@ public class GameLogic {
         
         // Меняем игрока
         currentPlayer = (currentPlayer == Core.Color.WHITE) ? Core.Color.BLACK : Core.Color.WHITE;
+        
+        // Проверяем мат и пат для нового игрока
+        if (isCheckmate(currentPlayer)) {
+            gameOver = true;
+        } else if (isStalemate(currentPlayer)) {
+            gameOver = true;
+        }
         
         return true;
     }
